@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const Model = require('./Model');
 
 class View {
-  topics = ['Кошки и собаки', 'Пятница'];
+  topics = ['Кошки и собаки', 'Пятница', 'Общие вопросы'];
 
   quizResults = [];
 

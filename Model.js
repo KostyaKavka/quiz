@@ -10,7 +10,7 @@ class Model {
 
     const file = (await fs.readFile(`./topics/${files[this.topic]}`, 'utf-8'))
       .trim()
-      .split('\r\n')
+      .split('\n')
       .filter((item) => item !== '');
 
     const questions = file.filter((item, index) => index % 2 === 0);
