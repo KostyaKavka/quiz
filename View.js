@@ -81,6 +81,4 @@ class View {
   }
 }
 
-const view = new View();
-
-view.show();
+module.exports = View;
