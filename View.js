@@ -55,32 +55,28 @@ class View {
       .then(async (answers) => {
         const selectedTopic = this.topics.indexOf(answers.topic);
         const data = await new Model(selectedTopic).readFiles();
-        const questionsAndAnswers = data.map((item) => ({
+        const questionsAndAnswers = data.map((item, index) => ({
           type: 'input',
-          name: item.answer,
+          name: `${item.answer}_${index}`,
           message: `${item.question}\n`,
         }));
 
-        const quizResults = inquirer.prompt(questionsAndAnswers);
+        this.quizResults = await inquirer.prompt(questionsAndAnswers);
 
-        quizResults.then((answers) => console.log(answers));
+        // eslint-disable-next-line no-restricted-syntax
+        for (const key in this.quizResults) {
+          if (this.quizResults[key] === key.slice(0, key.indexOf('_'))) {
+            this.points += 10;
+          }
+        }
 
-        // this.quizResults = await inquirer.prompt(questionsAndAnswers);
+        const percentageCorrect = (this.points / 70) * 100;
 
-        // // eslint-disable-next-line no-restricted-syntax
-        // for (const key in this.quizResults) {
-        //   if (this.quizResults[key] === key) {
-        //     this.points += 10;
-        //   }
-        // }
-
-        // const percentageCorrect = (this.points / 70) * 100;
-
-        // console.log(
-        //   `\n${answers.username}, вы правильно ответили на ${Math.floor(
-        //     percentageCorrect
-        //   )}% вопросов.`
-        // );
+        console.log(
+          `\n${answers.username}, вы правильно ответили на ${Math.floor(
+            percentageCorrect
+          )}% вопросов.`
+        );
       });
   }
 }
