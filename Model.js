@@ -8,9 +8,7 @@ class Model {
   async readFiles() {
     const files = await fs.readdir('./topics');
 
-    const file = (
-      await fs.readFile(`./topics/${files[this.topic - 1]}`, 'utf-8')
-    )
+    const file = (await fs.readFile(`./topics/${files[this.topic]}`, 'utf-8'))
       .trim()
       .split('\r\n')
       .filter((item) => item !== '');
