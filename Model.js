@@ -23,3 +23,5 @@ class Model {
     return questionsAndAnswers;
   }
 }
+
+module.exports = Model;
